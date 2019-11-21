@@ -11,10 +11,12 @@ namespace LoggingTesterCmd
     public class Program
     {
         private static T4GLogger Logger;
+        private static T4GLogger LoggerTwo;
 
         private static void Main(string[] args)
         {
-            Logger = new T4GLogger("TestLogs", "TestLogFile", "[TestLog] ");
+            Logger = new T4GLogger(@"T4G.Logs\Main", "Main", "[Main] ");
+            Logger = new T4GLogger(@"T4G.Logs\Other", "Other", "[Other] ");
             Logger.CLog("Loaded!", ConsoleColor.Cyan);
 
             while (true)
@@ -38,21 +40,26 @@ namespace LoggingTesterCmd
                 {
                     case 1:
                         Logger.CLog(param);
+                        LoggerTwo.CLog(param);
                         break;
                     case 2:
                         Logger.CLogWarning(param);
+                        LoggerTwo.CLogWarning(param);
                         break;
                     case 3:
                         Logger.CLogError(param);
+                        LoggerTwo.CLogError(param);
                         break;
                     default:
                         Logger.CLogOfInColor("Wrong format!", new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue }, true);
+                        LoggerTwo.CLogOfInColor("Wrong format!", new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue }, true);
                         break;
                 }
             }
 
 
             Logger.CLogOfInColor("Hello World", new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue }, true);
+            LoggerTwo.CLogOfInColor("Hello World", new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue }, true);
 
             Console.ReadLine();
         }
