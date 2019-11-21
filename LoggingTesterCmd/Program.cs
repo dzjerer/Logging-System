@@ -16,7 +16,7 @@ namespace LoggingTesterCmd
         private static void Main(string[] args)
         {
             Logger = new T4GLogger(@"T4G.Logs\Main", "Main", "[Main] ");
-            Logger = new T4GLogger(@"T4G.Logs\Other", "Other", "[Other] ");
+            LoggerTwo = new T4GLogger(@"T4G.Logs\Other", "Other", "[Other] ");
             Logger.CLog("Loaded!", ConsoleColor.Cyan);
 
             while (true)
