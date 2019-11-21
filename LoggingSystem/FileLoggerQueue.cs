@@ -28,7 +28,7 @@ namespace LoggingSystem
                     FileInfo file = new FileInfo(filePath);
                     if (file.Exists)
                     {
-                        int logId = (int)(DateTime.UtcNow - new DateTime(2000, 1, 1)).TotalSeconds;
+                        int logId = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
                         bool can = true;
                         int moreThan = 0;
 
