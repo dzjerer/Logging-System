@@ -60,8 +60,18 @@ namespace LoggingTesterCmd
 
             Logger.CLogOfInColor("Hello World", new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue }, true);
             LoggerTwo.CLogOfInColor("Hello World", new ConsoleColor[] { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue }, true);
+            Console.WriteLine();
+
+            string name = "T4G.System.Taxi";
+            Logger.CLogLoadPlugin(name, Load);
 
             Console.ReadLine();
+        }
+
+        public static void Load()
+        {
+            Logger.CLogWithoutPrefix("[loadnig] T4G.SystemTaxi", ConsoleColor.Cyan);
+            Logger.CLogWithoutPrefix("> T4G.SystemTaxi >> Loaded!", ConsoleColor.Yellow);
         }
     }
 }

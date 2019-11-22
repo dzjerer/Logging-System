@@ -29,6 +29,61 @@ namespace LoggingSystem
         }
 
 
+        #region OldMethod
+        private static int oldStartTopPos;
+        private static int oldEndTopPos;
+
+        internal static int SetStartTopPos()
+        {
+            return oldStartTopPos = Console.CursorTop;
+        }
+        internal static int SetEndTopPos()
+        {
+            return oldEndTopPos = Console.CursorTop;
+        }
+
+        internal static void CLogLoadPluginStart(string pluginName)
+        {
+
+        }
+        internal static void CLogLoadPluginEnd(string pluginName)
+        {
+
+        }
+        #endregion
+
+        public void CLogLoadPlugin(string pluginName, Action baseLoadPlugin)
+        {
+            int oldStartTopPos = Console.CursorTop;
+            baseLoadPlugin();
+            int oldEndTopPos = Console.CursorTop;
+
+            Console.SetCursorPosition(0, oldStartTopPos);
+
+            CLogWithoutPrefix("\n[loading]", ConsoleColor.Cyan, false);
+            CLogWithoutPrefix("-", ConsoleColor.DarkYellow, false);
+            CLogOfInColor("|T4G|", new ConsoleColor[] { ConsoleColor.DarkGreen, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Magenta, ConsoleColor.DarkGreen }, false, false);
+            CLogWithoutPrefix("-", ConsoleColor.DarkYellow, false);
+            CLogWithoutPrefix("rocket", ConsoleColor.DarkCyan, false);
+            CLogWithoutPrefix("-", ConsoleColor.DarkYellow, false);
+            CLogWithoutPrefix("plugin", ConsoleColor.DarkCyan, false);
+            CLogWithoutPrefix("-", ConsoleColor.DarkYellow, false);
+            CLogWithoutPrefix("> ", ConsoleColor.DarkCyan, false);
+            CLogWithoutPrefix(pluginName, ConsoleColor.Cyan, false);
+            CLogWithoutPrefix(" <", ConsoleColor.DarkCyan, false);
+            CLogWithoutPrefix("-------" + new string('-', 8), ConsoleColor.DarkYellow, false);
+            CLogWithoutPrefix("<", ConsoleColor.Magenta, false);
+
+            Console.SetCursorPosition(0, oldEndTopPos);
+
+            CLogWithoutPrefix("--", ConsoleColor.DarkYellow, false);
+            CLogWithoutPrefix("<end>", ConsoleColor.Magenta, false);
+            CLogWithoutPrefix(new string('-', (32 + pluginName.Length) + 10), ConsoleColor.DarkYellow, false);
+            CLogWithoutPrefix("<", ConsoleColor.Magenta);
+        }
+
+
+
 
         public void CLog(string message, ConsoleColor color = ConsoleColor.White, bool newLine = true)
         {
@@ -73,7 +128,7 @@ namespace LoggingSystem
             string text = PrefixMsg(message);
             Log(ELogType.ERROR, text, null);
             T4GCLog(ELogType.ERROR, text);
-        }
+        }   
 
         internal void LogException(Exception ex, string message)
         {
